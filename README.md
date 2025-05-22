@@ -29,6 +29,62 @@ A React Native application for managing and filtering car import requests. This 
 - **Styling:** React Native StyleSheet
 - **Type Safety:** TypeScript
 
+## API Documentation
+
+### Base URL
+```
+https://6820b96e259dad2655ad68e1.mockapi.io
+```
+
+### Endpoints
+
+#### Get Car Requests
+```
+GET /api/v1/car-requests
+```
+
+**Query Parameters:**
+- `page` (number): Page number for pagination
+- `limit` (number): Number of items per page (default: 10)
+- `price` (number): Filter by price
+- `productionYear` (number): Filter by production year
+- `type` (string): Filter by car type
+
+**Example Request:**
+```
+GET /api/v1/car-requests?page=1&limit=10&productionYear=2020&price=27000&type=SUV
+```
+
+**Example Response:**
+```json
+[
+  {
+    "id": "1",
+    "carModel": "Toyota RAV4",
+    "productionYear": 2020,
+    "price": 32000,
+    "type": "SUV",
+    "requesterName": "Ahmed Samir",
+    "location": "Cairo",
+    "image": "https://example.com/image.png"
+  }
+]
+```
+
+## Environment Setup
+
+1. Create a `.env` file in the root directory:
+```bash
+touch .env
+```
+
+2. Add the following environment variables:
+```env
+API_BASE_URL=https://6820b96e259dad2655ad68e1.mockapi.io
+API_TIMEOUT=10000
+CACHE_DURATION=300000  # 5 minutes in milliseconds
+```
+
 ## Prerequisites
 
 - Node.js (v14 or higher)
@@ -51,14 +107,20 @@ yarn install
 npm install
 ```
 
-3. Start the development server:
+3. Set up environment variables:
+```bash
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+4. Start the development server:
 ```bash
 yarn start
 # or
 npm start
 ```
 
-4. Run on your preferred platform:
+5. Run on your preferred platform:
 ```bash
 # For iOS
 yarn ios
@@ -96,6 +158,13 @@ Run tests with coverage:
 ```bash
 yarn test --coverage
 ```
+
+### Test Coverage
+- Unit tests for components
+- Integration tests for API calls
+- Hook tests for custom hooks
+- State management tests
+- Cache service tests
 
 ## Contributing
 
